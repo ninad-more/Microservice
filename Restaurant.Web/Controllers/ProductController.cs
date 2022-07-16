@@ -25,7 +25,7 @@ namespace Restaurant.Web.Controllers
             }
 
             return View(list);
-        }
+        }       
 
         public async Task<IActionResult> Create()
         {
