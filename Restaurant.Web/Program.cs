@@ -1,8 +1,15 @@
+using Restaurant.Web;
+using Restaurant.Web.Services;
+using Restaurant.Web.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddMvc();
+builder.Services.AddHttpClient<IProductService, ProductService>();
+StaticDetails.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
