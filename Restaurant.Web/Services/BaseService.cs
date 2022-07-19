@@ -25,7 +25,9 @@ namespace Restaurant.Web.Services
                 msg.RequestUri = new Uri(apiRequest.Url);
                 client.DefaultRequestHeaders.Clear();
 
-                if(apiRequest.Data != null)
+                var v = JsonConvert.SerializeObject(apiRequest.Data);
+
+                if (apiRequest.Data != null)
                 {
                     msg.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8, "application/json");
                 }

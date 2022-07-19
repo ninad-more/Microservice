@@ -10,5 +10,6 @@ namespace Restaurant.Web.Services.Interfaces
         Task<T> CreateProductAsync<T>(ProductDto productDto);
         Task<T> UpdateProductAsync<T>(ProductDto productDto);
         Task<T> DeleteProductAsync<T>(int id);
+        Task<T> GetProductByIdAsync<T>(int id);
     }
 }

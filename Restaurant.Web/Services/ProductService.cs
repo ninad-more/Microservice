@@ -17,8 +17,7 @@ namespace Restaurant.Web.Services
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = productDto,
-                Url = StaticDetails.ProductAPIBase + "/api/products",
-                Token = ""
+                Url = StaticDetails.ProductAPIBase + "/api/products"
             });
         }
 
@@ -27,8 +26,7 @@ namespace Restaurant.Web.Services
             return await this.SendAsync<T>(new Models.APIRequest()
             {
                 ApiType = StaticDetails.ApiType.DELETE,
-                Url = StaticDetails.ProductAPIBase + "/api/products/" + id,
-                Token = ""
+                Url = StaticDetails.ProductAPIBase + "/api/products/" + id
             });
         }
 
@@ -37,8 +35,7 @@ namespace Restaurant.Web.Services
             return await this.SendAsync<T>(new Models.APIRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
-                Url = StaticDetails.ProductAPIBase + "/api/products/",
-                Token = ""
+                Url = StaticDetails.ProductAPIBase + "/api/products/"
             });
         }
 
@@ -47,8 +44,16 @@ namespace Restaurant.Web.Services
             return await this.SendAsync<T>(new Models.APIRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
-                Url = StaticDetails.ProductAPIBase + "/api/products/" + id,
-                Token = ""
+                Url = StaticDetails.ProductAPIBase + "/api/products/" + id
+            });
+        }
+
+        public async Task<T> GetProductByIdAsync<T>(int id)
+        {
+            return await this.SendAsync<T>(new Models.APIRequest()
+            {
+                ApiType = StaticDetails.ApiType.GET,
+                Url = StaticDetails.ProductAPIBase + "/api/products/" + id
             });
         }
 
@@ -58,8 +63,7 @@ namespace Restaurant.Web.Services
             {
                 ApiType = StaticDetails.ApiType.PUT,
                 Data = productDto,
-                Url = StaticDetails.ProductAPIBase + "/api/products",
-                Token = ""
+                Url = StaticDetails.ProductAPIBase + "/api/products"
             });
         }
     }

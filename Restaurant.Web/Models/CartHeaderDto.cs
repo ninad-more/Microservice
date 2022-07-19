@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Restaurant.API.ShoppingCartAPI.Models.Dto
+﻿namespace Restaurant.Web.Models
 {
     public class CartHeaderDto
     {
@@ -8,6 +6,5 @@ namespace Restaurant.API.ShoppingCartAPI.Models.Dto
         public string UserId { get; set; }
         public string CoupanCode { get; set; }
         public double OrderTotal { get; set; }
-
     }
 }
