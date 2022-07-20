@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Restaurant.API.ShoppingCartAPI.Messages;
 using Restaurant.API.ShoppingCartAPI.Models.Dto;
 using Restaurant.API.ShoppingCartAPI.Repository.Interfaces;
 
@@ -72,6 +73,31 @@ namespace Restaurant.API.ShoppingCartAPI.Controllers
             {
                 bool isSuccess = await _repository.RemoveFromCart(cartId);
                 _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("Checkout")]
+        public async Task<object> Checkout(CheckoutHeaderDto checkoutHeader)
+        {
+            try
+            {
+                CartDto cartDto = await _repository.GetCart();
+                if (cartDto == null)
+                {
+                    return BadRequest();
+                }               
+
+                checkoutHeader.CartDetails = cartDto.CartDetails;
+                //logic to add message to process order.
+                //await _messageBus.PublishMessage(checkoutHeader, "checkoutqueue");
+
+                await _repository.ClearCart();
             }
             catch (Exception ex)
             {

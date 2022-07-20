@@ -61,14 +61,18 @@ namespace Restaurant.Web.Controllers
                     TempData["Error"] = response.DisplayMessage;
                     return RedirectToAction(nameof(Checkout));
                 }
-                //return RedirectToAction(nameof(Confirmation));
+                
+                return RedirectToAction(nameof(Confirmation));
             }
             catch (Exception e)
             {
                 return View(cartDto);
             }
+        }
 
-            return View(cartDto);
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
         }
     }
 }
