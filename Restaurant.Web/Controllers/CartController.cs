@@ -18,10 +18,10 @@ namespace Restaurant.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await LoadCartDtoBasedOnLoggedInUser());
+            return View(await LoadCart());
         }
 
-        private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
+        private async Task<CartDto> LoadCart()
         {
             var userId = "x";
             var accessToken = "y";
@@ -43,6 +43,32 @@ namespace Restaurant.Web.Controllers
             }
 
             return cartDto;
+        }
+
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCart());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartDto cartDto)
+        {
+            try
+            {
+                var response = await _cartService.Checkout<ResponseDto>(cartDto.Header);
+                if (!response.IsSuccess)
+                {
+                    TempData["Error"] = response.DisplayMessage;
+                    return RedirectToAction(nameof(Checkout));
+                }
+                //return RedirectToAction(nameof(Confirmation));
+            }
+            catch (Exception e)
+            {
+                return View(cartDto);
+            }
+
+            return View(cartDto);
         }
     }
 }

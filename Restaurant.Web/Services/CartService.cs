@@ -21,6 +21,16 @@ namespace Restaurant.Web.Services
             });
         }
 
+        public async Task<T> Checkout<T>(CartHeaderDto cartHeader)
+        {
+            return await this.SendAsync<T>(new APIRequest()
+            {
+                ApiType = StaticDetails.ApiType.POST,
+                Data = cartHeader,
+                Url = StaticDetails.ShoppingCartAPIBase + "/api/cart/checkout"
+            });
+        }
+
         public async Task<T> GetCartAsnyc<T>()
         {
             return await this.SendAsync<T>(new APIRequest()

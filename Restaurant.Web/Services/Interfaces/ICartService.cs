@@ -8,5 +8,6 @@ namespace Restaurant.Web.Services.Interfaces
         Task<T> AddToCartAsync<T>(CartDto cartDto);
         Task<T> UpdateCartAsync<T>(CartDto cartDto);
         Task<T> RemoveFromCartAsync<T>(int cartId);
+        Task<T> Checkout<T>(CartHeaderDto cartHeader);
     }
 }
