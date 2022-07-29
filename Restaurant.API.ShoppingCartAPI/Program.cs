@@ -4,6 +4,7 @@ using Restaurant.API.ShoppingCartAPI;
 using Restaurant.API.ShoppingCartAPI.Database;
 using Restaurant.API.ShoppingCartAPI.Repository;
 using Restaurant.API.ShoppingCartAPI.Repository.Interfaces;
+using Restaurant.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddSingleton<IMessageBus, MessageBus>();
 builder.Services.AddControllers();
 var app = builder.Build();
 

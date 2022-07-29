@@ -2,6 +2,7 @@
 using Restaurant.API.ShoppingCartAPI.Messages;
 using Restaurant.API.ShoppingCartAPI.Models.Dto;
 using Restaurant.API.ShoppingCartAPI.Repository.Interfaces;
+using Restaurant.MessageBus;
 
 namespace Restaurant.API.ShoppingCartAPI.Controllers
 {
@@ -11,11 +12,12 @@ namespace Restaurant.API.ShoppingCartAPI.Controllers
     {
         protected Responsedto _response;
         private ICartRepository _repository;
-
-        public CartController(ICartRepository cartRepository)
+        private IMessageBus _messageBus;
+        public CartController(ICartRepository cartRepository, IMessageBus messageBus)
         {
             _repository = cartRepository;
             this._response = new Responsedto();
+            _messageBus = messageBus;
         }
 
         [HttpGet("GetCart")]
@@ -94,8 +96,8 @@ namespace Restaurant.API.ShoppingCartAPI.Controllers
                 }               
 
                 checkoutHeader.CartDetails = cartDto.CartDetails;
-                //logic to add message to process order.
-                //await _messageBus.PublishMessage(checkoutHeader, "checkoutqueue");
+
+                await _messageBus.PublishMessage(checkoutHeader, "checkoutqueue");
 
                 await _repository.ClearCart();
             }

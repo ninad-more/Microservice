@@ -1,8 +1,9 @@
 ﻿using Restaurant.API.ShoppingCartAPI.Models.Dto;
+using Restaurant.MessageBus;
 
 namespace Restaurant.API.ShoppingCartAPI.Messages
 {
-    public class CheckoutHeaderDto
+    public class CheckoutHeaderDto : BaseMessage
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }

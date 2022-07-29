@@ -1,3 +1,4 @@
+using Restaurant.MessageBus;
 using Restaurant.Web;
 using Restaurant.Web.Services;
 using Restaurant.Web.Services.Interfaces;
@@ -13,6 +14,7 @@ StaticDetails.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 StaticDetails.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartAPI"];
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddSingleton<IMessageBus, MessageBus>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
