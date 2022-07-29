@@ -35,7 +35,7 @@ namespace Restaurant.Web.Services
             return await this.SendAsync<T>(new Models.APIRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
-                Url = StaticDetails.ProductAPIBase + "/api/products/"
+                Url = StaticDetails.ProductAPIBase + "/api/products"
             });
         }
 

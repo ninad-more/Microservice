@@ -7,7 +7,8 @@ namespace Restaurant.MessageBus
 {
     public class MessageBus : IMessageBus
     {
-        private readonly string connectionString = ConfigurationManager.AppSettings["connectionstring"].ToString();
+        //private readonly string connectionString = ConfigurationManager.AppSettings["connectionstring"].ToString();
+        private readonly string connectionString = "";
         public async Task PublishMessage(BaseMessage message, string topicName)
         {
             try
